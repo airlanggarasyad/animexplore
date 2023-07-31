@@ -13,4 +13,5 @@ const Layout = ({ children }) => {
     );
 };
 
+Layout.displayName= 'Layout';
 export default Layout;

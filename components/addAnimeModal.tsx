@@ -142,4 +142,5 @@ const AddAnimeModal = ({ isModalOpen, handleOk, handleCancel, animeToAdd, collec
   );
 };
 
+AddAnimeModal.displayName= 'AddAnimeModal';
 export default AddAnimeModal;

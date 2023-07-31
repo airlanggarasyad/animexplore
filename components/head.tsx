@@ -1,7 +1,6 @@
 import Head from "next/head"
 
-export default function 
-({ title }) {
+export default function DynaHead({ title }) {
     return (
         <Head>
             <title>{title}</title>

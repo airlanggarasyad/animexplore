@@ -123,3 +123,5 @@ export default function AnimeBox({ anime }: { anime: Anime }) {
     </>
   );
 }
+
+AnimeBox.displayName = 'AnimeBox';
