@@ -9,12 +9,23 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@apollo/client": "^3.7.17",
+    "@emotion/core": "^11.0.0",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "antd": "^5.7.3",
+    "graphql": "^16.7.1",
     "next": "13.4.12",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-paginate": "^8.2.0",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
+    "@types/node": "20.4.5",
+    "@types/react": "18.2.17",
     "eslint": "8.46.0",
-    "eslint-config-next": "13.4.12"
+    "eslint-config-next": "13.4.12",
+    "typescript": "5.1.6"
   }
 }
