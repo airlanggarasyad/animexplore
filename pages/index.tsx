@@ -90,7 +90,7 @@ export default function Home({ animes, pageInfo }) {
         <div className={styles.grid}>
           {animeData.map((anime) => (
             // <Link href={`/animeDetailPage?id=${encodeURIComponent(anime.id)}`} key={anime.id}>
-              <AnimeBox anime={anime} />
+              <AnimeBox anime={anime} key={anime.id} />
             // </Link>
           ))}
         </div>

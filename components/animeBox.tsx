@@ -1,13 +1,15 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import { PlusOutlined, ArrowRightOutlined, CloseOutlined, SettingOutlined } from '@ant-design/icons';
+import { PlusOutlined, ArrowRightOutlined, SettingOutlined } from '@ant-design/icons';
 import { Card } from 'antd';
 import { useRouter } from 'next/router';
 
-import { useState, useEffect, createRef } from "react";
+import { useState, useEffect } from "react";
 
-import { addAnime, loadAnimeCollection, removeAnime } from "../pages/api/anime-collection-services";
+import { addAnime, loadAnimeCollection } from "../pages/api/anime-collection-services";
 import AddAnimeModal from "./addAnimeModal";
+
+import CustomError from "./customError";
 
 interface Anime {
   id: number;
@@ -20,20 +22,21 @@ interface Anime {
   };
 }
 
-
 export default function AnimeBox({ anime }: { anime: Anime }) {
   const [animeCollection, setAnimeCollection] = useState([]);
 
-  useEffect(() => {
-    const loadAnimeCollection = () => {
-      const rawAnimeCollection = localStorage.getItem('anime-collection');
-      const animeCollection = rawAnimeCollection ? JSON.parse(rawAnimeCollection) : [];
-      return animeCollection;
-    };
-
+  const fetchCollection = () => {
     const collection = loadAnimeCollection();
     setAnimeCollection(collection);
+  }
+
+  useEffect(() => {
+    fetchCollection()
   }, []);
+
+  // useEffect(() => {
+  //   fetchCollection()
+  // }, animeCollection);
 
   const boxStyles = css`
     margin: 0.5em 0.3em;
@@ -50,6 +53,9 @@ export default function AnimeBox({ anime }: { anime: Anime }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [collectionState, setCollectionState] = useState(null);
 
+  const [duplicateAlert, setDuplicateAlert] = useState(null);
+  const [showAlert, setShowAlert] = useState(false);
+
   const onChangeCollectionDropDown = (v) => {
     setCollectionState(v);
   }
@@ -63,8 +69,17 @@ export default function AnimeBox({ anime }: { anime: Anime }) {
   };
 
   const handleOk = () => {
-    setIsModalOpen(false);
-    addAnime(anime.id, collectionState);
+    const ret = addAnime(anime.id, collectionState);
+
+    const handleCloseAlert = () => {
+      setShowAlert(false); // Event handler to hide the alert when the "x" button is clicked
+    };
+
+    if (ret.response != 0) {
+      setDuplicateAlert(<CustomError msg={ret.msg} onClose={handleCloseAlert} type={"error"}/>)
+    } else {
+      setIsModalOpen(false);
+    }
   };
 
   const handleCancel = () => {
@@ -80,6 +95,8 @@ export default function AnimeBox({ anime }: { anime: Anime }) {
         animeToAdd={anime}
         collection={animeCollection}
         onChangeDropdown={onChangeCollectionDropDown}
+        refresh={fetchCollection}
+        addAnimeError={duplicateAlert}
       />
       <Card
         style={{ width: 300 }}

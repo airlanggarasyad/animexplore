@@ -8,15 +8,23 @@ const loadAnimeCollection = () => {
 }
 
 const createCollection = (collection, collectionName: string) => {
-    collection.push(
-        {
-            key: uuidv4(),
-            label: collectionName,
-            animes: []
-        }
-    )
+    const isCollectionNameExist = collection.some(item => item.label === collectionName);
 
-    localStorage.setItem('anime-collection', JSON.stringify(collection));
+    if (!isCollectionNameExist) {
+        collection.push(
+            {
+                key: uuidv4(),
+                label: collectionName,
+                animes: []
+            }
+        )
+
+        localStorage.setItem('anime-collection', JSON.stringify(collection));
+
+        return { "response": 0, "msg": null }
+    } else {
+        return { "response": -1, "msg": `Collection ${collectionName} is already exist.` };
+    }
 }
 
 const addAnime = (animeID: number, collectionID: string) => {
@@ -29,8 +37,10 @@ const addAnime = (animeID: number, collectionID: string) => {
     if (!selectedArray.includes(animeID)) {
         selectedArray.push(animeID)
         localStorage.setItem('anime-collection', JSON.stringify(storedAnimes));
+
+        return { "response": 0, "msg": null }
     } else {
-        console.log("Anime ID exists");
+        return { "response": -1, "msg": `Anime already exist on ${selectedCollection.label}.` };
     }
 };
 
@@ -43,7 +53,7 @@ const removeAnime = (animeID: number, collectionID: string) => {
 
     const selectedAnimeIndex = selectedArray.indexOf(animeID);
     selectedArray.splice(selectedAnimeIndex, 1);
-    
+
     localStorage.setItem('anime-collection', JSON.stringify(storedAnimes));
 };
 
