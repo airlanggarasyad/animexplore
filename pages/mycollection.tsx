@@ -72,22 +72,10 @@ export default function Home({ animes, pageInfo }) {
 
   return (
     <div className={styles.container}>
-      <DynaHead title={"AnimExplore"} />
-      <div className={styles.grid}>
-        {animeData.map((anime) => (
-          <AnimeBox anime={anime} key={anime.id} />
-        ))}
-      </div>
+      <DynaHead title={"AnimExplore - MyCollection"} />
 
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <Pagination
-          defaultCurrent={1}
-          total={pageInfo.lastPage}
-          onChange={onChange}
-          css={css`padding: 1em 0;`}
-          showSizeChanger={false}
-          showQuickJumper={false}
-        />
+      <div style={{ display: "flex", justifyContent: "center", minHeight: "55vh" }}>
+        ON PROGRESS
       </div>
     </div>
   );

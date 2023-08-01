@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
+
 import { PlusOutlined, ArrowRightOutlined, SettingOutlined } from '@ant-design/icons';
 import { Card } from 'antd';
 import { useRouter } from 'next/router';
@@ -116,8 +117,8 @@ export default function AnimeBox({ anime }: { anime: Anime }) {
         css={boxStyles}
       >
         <Meta
-          title={anime.title.english ? anime.title.english : anime.title.romaji}
-          description={`${anime.title.romaji} (${anime.title.native})`}
+          title={anime.title.romaji}
+          description={`${anime.title.native} ${anime.title.english ? `(${anime.title.english})` : ''}`}
         />
       </Card>
     </>

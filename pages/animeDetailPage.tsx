@@ -120,14 +120,14 @@ export default function AnimeDetailPage() {
                         <div css={css`display: flex; flex-direction: column;`}>
                             <Space direction="vertical" size="middle">
                                 <div className="imgContainer" css={css`height: 20vh; border-radius: 20px;`}>
-                                    <Image style={{borderRadius: "8px"}} css={css`position: relative !important;`} src={animeInfo.bannerImage} fill={true} objectFit='cover' alt={"Anime banner"} />
+                                    <Image style={{borderRadius: "8px"}} css={css`position: relative !important;`} src={animeInfo.bannerImage ? animeInfo.bannerImage : "/img_not_available.png"} fill={true} objectFit='cover' alt={"Anime banner"} />
                                 </div>
 
                                 <div>
                                     <span className={styles.title} css={css`font-weight: 600; font-size: 2em;`}>{animeInfo.title.romaji}</span> <br />
                                     <span>{animeInfo.title.native} <br/>
                                     Year: {animeInfo.seasonYear}
-                                    {animeInfo.title.english ? <><br/><br/>English Title:<br/>{animeInfo.title.english}`</> : null}</span>
+                                    {animeInfo.title.english ? <><br/><br/>English Title:<br/>{animeInfo.title.english}</> : null}</span>
                                 </div>
                                 
                                 <Space css={css`display:flex;`} size="middle">
