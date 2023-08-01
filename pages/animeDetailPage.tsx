@@ -101,7 +101,7 @@ export default function AnimeDetailPage() {
 
     return (
         <div className={styles.container}>
-            <div className={styles.grid}>
+            <div className={styles.grid} css={css`max-width: 900px;`}>
                 <DynaHead title={"AnimExplore"} />
                 {animeInfo ? (
                     <>

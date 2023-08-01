@@ -76,7 +76,7 @@ export default function AnimeBox({ anime }: { anime: Anime }) {
     };
 
     if (ret.response != 0) {
-      setDuplicateAlert(<CustomError msg={ret.msg} onClose={handleCloseAlert} type={"error"}/>)
+      setDuplicateAlert(<CustomError msg={ret.msg} onClose={handleCloseAlert} type={"error"} />)
     } else {
       setIsModalOpen(false);
     }
@@ -100,6 +100,7 @@ export default function AnimeBox({ anime }: { anime: Anime }) {
       />
       <Card
         style={{ width: 300 }}
+
         cover={
           <img
             alt="example"
@@ -119,7 +120,6 @@ export default function AnimeBox({ anime }: { anime: Anime }) {
           description={`${anime.title.romaji} (${anime.title.native})`}
         />
       </Card>
-
     </>
   );
 }
