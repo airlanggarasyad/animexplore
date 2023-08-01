@@ -11,9 +11,13 @@ const Navigator = () => {
     const router = useRouter();
 
     useEffect(() => {
-        const currentItem = items.find(item => item.route === router.asPath);
-        setCurrent(currentItem.key)
-    },[router])
+        try {
+            const currentItem = items.find(item => item.route === router.asPath);
+            setCurrent(currentItem.key)
+        } catch {
+            setCurrent(null);
+        }
+    }, [router])
 
     const items = [
         {
@@ -27,7 +31,7 @@ const Navigator = () => {
         },
         {
             label: (
-                 <Link onClick={() => handleRouter('/mycollection')} href={"/mycollection"}>
+                <Link onClick={() => handleRouter('/mycollection')} href={"/mycollection"}>
                     My Collection
                 </Link>
             ),
@@ -36,7 +40,7 @@ const Navigator = () => {
         },
         {
             label: (
-                 <Link href={"https://airlanggarasyad.com"}>
+                <Link href={"https://airlanggarasyad.com"}>
                     About
                 </Link>
             ),
@@ -51,11 +55,11 @@ const Navigator = () => {
     const [current, setCurrent] = useState('home');
 
     return (
-        <Menu 
-            selectedKeys={[current]} 
-            mode="horizontal" 
-            items={items} 
-            style={{justifyContent: "center", marginBottom: "0.5em"}}
+        <Menu
+            selectedKeys={[current]}
+            mode="horizontal"
+            items={items}
+            style={{ justifyContent: "center", marginBottom: "0.5em" }}
         />
     );
 }
